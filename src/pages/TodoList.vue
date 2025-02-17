@@ -1,17 +1,24 @@
+<script setup lang="ts">
+import { ref } from "vue";
 
+const items = ref<Array<string>>(["item1", "item2"]);
+const newitem = ref("");
 
-<template>
-This is the todo List
-</template>
-
-
-
-<script lang="ts">
-if (true == true) {
-    console.log("True");
-} 
-
+const addItem = () => {
+  items.value.push(newitem.value);
+  newitem.value = "";
+};
 </script>
 
+<template>
+  This is the todo List
 
+  <button @click="addItem">Add item</button>
+  <input placeholder="important item" v-model="newitem" />
 
+  <template v-for="item of items">
+    <div>
+      {{ item }}
+    </div>
+  </template>
+</template>
