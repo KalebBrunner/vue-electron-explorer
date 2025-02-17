@@ -1,0 +1,8 @@
+
+Todolist
+
+fix vue prettier to 4 spaces
+and typscript
+
+find electron secuirty warning bug 
+https://electronjs.org/docs/tutorial/security
