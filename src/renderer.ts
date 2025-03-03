@@ -31,6 +31,4 @@ import { createApp } from "vue";
 import App from "/src/App.vue";
 
 createApp(App).mount("#app");
-console.log(
-  '👋 This message is being logged by "renderer.ts", included via Vite'
-);
+console.log('👋 This message is being logged by "renderer.ts"');

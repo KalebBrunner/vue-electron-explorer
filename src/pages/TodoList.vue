@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 
 const items = ref<Array<string>>(["item1", "item2"]);
 const newitem = ref("");
@@ -8,6 +8,10 @@ const addItem = () => {
   items.value.push(newitem.value);
   newitem.value = "";
 };
+
+onMounted(() => {
+  console.log(`This message is being logged by "TodoList.vue"`);
+});
 </script>
 
 <template>
@@ -22,3 +26,9 @@ const addItem = () => {
     </div>
   </template>
 </template>
+
+<style scoped>
+button {
+  font-weight: bold;
+}
+</style>
