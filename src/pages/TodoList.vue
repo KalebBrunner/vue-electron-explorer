@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 
-const items = ref<Array<string>>(["item1", "item2"]);
+const items = ref<Array<string>>([]);
 const newitem = ref("");
 
 const addItem = () => {

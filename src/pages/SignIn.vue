@@ -9,6 +9,7 @@ const emit = defineEmits<{
   (event: "update:login-status", value: boolean): void;
 }>();
 
+const validUsers = ref<string[]>(["Gage", "Kaleb", "Paul"]);
 const userName = ref<string | null | undefined>(undefined);
 const userString = ref("");
 const failedAttemtps = ref(0);
@@ -23,7 +24,7 @@ const failedAttemptsMessege = computed(() => {
 });
 
 const verifyName = () => {
-  if (userString.value === "Kaleb") {
+  if (validUsers.value.includes(userString.value)) {
     userName.value = userString.value;
     emit("update:login-status", true);
   } else if (userString.value === "") {
