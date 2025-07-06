@@ -2,7 +2,7 @@ import { app, BrowserWindow, ipcMain } from "electron";
 import path from "path";
 
 import started from "electron-squirrel-startup";
-import "./ipc-fs-handler";
+import "./ipc_fs_handler";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
