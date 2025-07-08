@@ -12,12 +12,12 @@ const files = ref<
   }[]
 >([]);
 
-const currentPath = ref("");
+let currentPath = ref("");
 
 // Use the API to get the Downloads path
 const getDownloadsPath = async () => {
   currentPath.value = await (window as any).electron.getDownloadsPath();
-  updateDirectory(currentPath.value); // Start loading files from Downloads
+  void updateDirectory(currentPath.value); // Start loading files from Downloads
 };
 
 const updateDirectory = async (folderPath: string) => {
@@ -26,13 +26,26 @@ const updateDirectory = async (folderPath: string) => {
 };
 
 // Call to get the Downloads path when the app starts
-getDownloadsPath();
+void getDownloadsPath();
+
+// const myPath = ref(currentPath.value);
+
+const goBack = (filepath: string) => {
+  let directoryElements = filepath.split("\\");
+  void directoryElements.pop();
+  currentPath.value = directoryElements.join("\\");
+  // currentPath.value = "C:\\";
+
+  void updateDirectory(currentPath.value);
+};
 </script>
 
 <template>
   hello this is file explorer
   <div>
     <h1>File Explorer</h1>
+    <button @click="goBack(currentPath)">back</button>
+    <!-- <p>Return: {{ currentPath }}</p> -->
     <p>Current Folder: {{ currentPath }}</p>
     <table>
       <thead>
@@ -56,14 +69,23 @@ getDownloadsPath();
 
 <style>
 table {
-  width: 100%;
+  /* width: 40%; */
   border-collapse: collapse;
 }
 
 th,
 td {
-  padding: 10px;
-  border: 1px solid #ddd;
+  /* border-collapse: collapse; */
+  /* width: 4000px; */
+
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+  white-space: nowrap;
+  line-height: 1;
+  font-size: small;
+  padding: 3px;
+  border: 0px solid #ddd;
   text-align: left;
 }
 

@@ -17,19 +17,14 @@ const formatSize = (size: number) => {
 
 <template>
   <tr>
-    <td>
-      <div @dblclick="emit('update-file-path', file.path)">
+    <td width="1000px">
+      <span @dblclick="emit('update-file-path', file.path)">
         <span v-if="file.isDirectory">📁</span>
         <span v-else>📄</span>
         {{ file.name }}
-      </div>
+      </span>
     </td>
     <td>{{ file.isDirectory ? "-" : formatSize(file.size) }}</td>
     <td>{{ file.modified }}</td>
   </tr>
 </template>
-
-<!-- 
-:key="file.path"
-@click="file.isDirectory && readFiles(file.path)"
-style="cursor: pointer" -->
