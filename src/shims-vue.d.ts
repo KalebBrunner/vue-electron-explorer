@@ -4,3 +4,13 @@ declare module "*.vue" {
   const component: DefineComponent<[], [], any>;
   export default component;
 }
+
+export {};
+
+declare global {
+  interface Window {
+    myAPI: {
+      findPrime: (upperLimit: number) => Promise<number>;
+    };
+  }
+}

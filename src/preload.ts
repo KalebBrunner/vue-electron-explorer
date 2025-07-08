@@ -7,4 +7,9 @@ contextBridge.exposeInMainWorld("electron", {
   readFolder: (folderPath: string) =>
     ipcRenderer.invoke("read-folder", folderPath),
   getDownloadsPath: () => ipcRenderer.invoke("get-downloads-path"), // Invoke from main process
+
+  ipcRenderer: {
+    invoke: (channel: string, ...args: any[]) =>
+      ipcRenderer.invoke(channel, ...args),
+  },
 });

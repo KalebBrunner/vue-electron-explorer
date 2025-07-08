@@ -4,6 +4,16 @@ import path from "path";
 import started from "electron-squirrel-startup";
 import "./ipc_fs_handler";
 
+// const findPrimes = require("../build/Release/findprimes.node");
+const findPrimes = require("bindings")("findprimes");
+
+const result = findPrimes(100);
+console.log("Largest prime under 100:", result);
+
+ipcMain.handle("find-prime", (_event, upperLimit: number) => {
+  return findPrimes(upperLimit);
+});
+
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
   app.quit();
@@ -15,6 +25,8 @@ const createWindow = () => {
     height: 600,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
+      contextIsolation: true,
+      nodeIntegration: false,
     },
   });
 
