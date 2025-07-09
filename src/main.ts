@@ -4,7 +4,6 @@ import path from "path";
 import started from "electron-squirrel-startup";
 import "./ipc_fs_handler";
 
-// const findPrimes = require("../build/Release/findprimes.node");
 const findPrimes = require("bindings")("findprimes");
 
 const result = findPrimes(100);

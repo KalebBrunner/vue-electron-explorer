@@ -3,7 +3,7 @@
     {
       "target_name": "findprimes",
       "sources": [
-        "findprimes.cc"
+        "src/native/findprimes.cc"
       ]
     }
   ]
