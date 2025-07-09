@@ -90,3 +90,10 @@ typings/
 
 # Electron-Forge
 out/
+
+# Native C++ tools / node-gyp
+*.sln
+*.gypi
+*.vcxproj
+*.vcxproj.filters
+
