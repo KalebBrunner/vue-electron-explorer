@@ -6,6 +6,7 @@ import { contextBridge, ipcRenderer } from "electron";
 contextBridge.exposeInMainWorld("electron", {
   readFolder: (folderPath: string) =>
     ipcRenderer.invoke("read-folder", folderPath),
+
   getDownloadsPath: () => ipcRenderer.invoke("get-downloads-path"), // Invoke from main process
 
   ipcRenderer: {

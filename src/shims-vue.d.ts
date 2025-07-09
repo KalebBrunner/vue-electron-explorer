@@ -14,3 +14,17 @@ declare global {
     };
   }
 }
+
+export interface ElectronAPI {
+  readFolder: (folderPath: string) => Promise<any>;
+  getDownloadsPath: () => Promise<string>;
+  ipcRenderer: {
+    invoke<T = any>(channel: string, ...args: any[]): Promise<T>;
+  };
+}
+
+declare global {
+  interface Window {
+    electron: ElectronAPI;
+  }
+}

@@ -3,10 +3,7 @@ import Welcome from "./pages/Welcome.vue";
 // import FileExplorer from "./pages/FileExplorer.vue";
 
 const findPrime = async () => {
-  const result = await (window as any).electron.ipcRenderer.invoke(
-    "find-prime",
-    100
-  );
+  const result = window.electron.ipcRenderer.invoke("find-prime", 100);
   console.log("Largest prime:", result);
 };
 </script>

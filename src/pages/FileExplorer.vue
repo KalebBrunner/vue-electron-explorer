@@ -16,13 +16,13 @@ let currentPath = ref("");
 
 // Use the API to get the Downloads path
 const getDownloadsPath = async () => {
-  currentPath.value = await (window as any).electron.getDownloadsPath();
+  currentPath.value = await window.electron.getDownloadsPath();
   void updateDirectory(currentPath.value); // Start loading files from Downloads
 };
 
 const updateDirectory = async (folderPath: string) => {
   currentPath.value = folderPath;
-  files.value = await (window as any).electron.readFolder(folderPath);
+  files.value = await window.electron.readFolder(folderPath);
 };
 
 // Call to get the Downloads path when the app starts
