@@ -1,11 +1,11 @@
 {
   "version": "2.0.0",
   "tasks": [
-    {
-      "label": "build-native-addon",
-      "type": "shell",
-      "command": "node-gyp rebuild",
-      "problemMatcher": []
-    }
-  ]
+{
+  "label": "build-native-addon",
+  "type": "shell",
+  "command": "cmd",
+  "args": ["/c", "node-gyp rebuild"],
+  "problemMatcher": []
 }
+]}

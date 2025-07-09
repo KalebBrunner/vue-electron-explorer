@@ -97,3 +97,8 @@ out/
 *.vcxproj
 *.vcxproj.filters
 
+*.node
+*.sln
+*.gypi
+*.vcxproj
+*.filters
