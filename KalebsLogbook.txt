@@ -1,0 +1,33 @@
+
+
+
+
+
+
+
+** 7/8/2025 x2**
+Ran the previous version on my laptop. To setup on my desktop, I needed to:
+choco install python --pre --force -y (reinstall python and add it to the path)
+manually download and install the C++ build tools (https://visualstudio.microsoft.com/visual-cpp-build-tools/)
+npm install bindings
+node-gyp configure
+node-gyp build
+
+
+** 7/8/2025 **
+Native C/C++ addon modules
+Primary Source
+https://github.com/nodejs/node-gyp
+
+Example Project
+https://www.youtube.com/watch?v=CJqERG2rBaU
+https://github.com/kapydev/native-code-tutorial
+
+Some new installations commands/settings
+choco install python visualstudio2022-workload-vctools -y
+node-gyp configure
+node-gyp build
+using "Visual Studio Installer" setup
+- "Visual C++ Build Tools 2022 17.14.7"
+- "Desktop development with C++""
+- "Windows 10 SDK 10.0.20348.0"

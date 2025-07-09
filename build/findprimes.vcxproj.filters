@@ -13,22 +13,25 @@
     <Filter Include="C:\Users\Kaleb">
       <UniqueIdentifier>{B3D41818-F59E-4611-324E-00A45E4D9F5C}</UniqueIdentifier>
     </Filter>
-    <Filter Include="C:\Users\Kaleb\Documents">
-      <UniqueIdentifier>{87566BA0-CA33-1144-65F5-087C5F9D6C20}</UniqueIdentifier>
+    <Filter Include="C:\Users\Kaleb\AppData">
+      <UniqueIdentifier>{F852EB63-437C-846A-220F-8D9ED6DAEC1D}</UniqueIdentifier>
     </Filter>
-    <Filter Include="C:\Users\Kaleb\Documents\MyElectronProject">
-      <UniqueIdentifier>{FC0246C3-1E71-95ED-1686-DCF6D5E7E178}</UniqueIdentifier>
+    <Filter Include="C:\Users\Kaleb\AppData\Local">
+      <UniqueIdentifier>{AA1ADE49-EB66-4CF9-B60D-A95495F1ED01}</UniqueIdentifier>
     </Filter>
-    <Filter Include="C:\Users\Kaleb\Documents\MyElectronProject\node_modules">
+    <Filter Include="C:\Users\Kaleb\AppData\Local\nvm">
+      <UniqueIdentifier>{1B85D12A-9F9C-E0A8-F82E-74864675B527}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="C:\Users\Kaleb\AppData\Local\nvm\v23.7.0">
+      <UniqueIdentifier>{9A63369B-1795-6803-EBE8-D2261E69B4C3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="C:\Users\Kaleb\AppData\Local\nvm\v23.7.0\node_modules">
       <UniqueIdentifier>{56DF7A98-063D-FB9D-485C-089023B4C16A}</UniqueIdentifier>
     </Filter>
-    <Filter Include="C:\Users\Kaleb\Documents\MyElectronProject\node_modules\@electron">
-      <UniqueIdentifier>{6FD122B1-87CE-5BE7-127F-692B6E499EA3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="C:\Users\Kaleb\Documents\MyElectronProject\node_modules\@electron\node-gyp">
+    <Filter Include="C:\Users\Kaleb\AppData\Local\nvm\v23.7.0\node_modules\node-gyp">
       <UniqueIdentifier>{77348C0E-2034-7791-74D5-63C077DF5A3B}</UniqueIdentifier>
     </Filter>
-    <Filter Include="C:\Users\Kaleb\Documents\MyElectronProject\node_modules\@electron\node-gyp\src">
+    <Filter Include="C:\Users\Kaleb\AppData\Local\nvm\v23.7.0\node_modules\node-gyp\src">
       <UniqueIdentifier>{8CDEE807-BC53-E450-C8B8-4DEBB66742D4}</UniqueIdentifier>
     </Filter>
     <Filter Include="..">
@@ -39,8 +42,8 @@
     <ClCompile Include="..\findprimes.cc">
       <Filter>..</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Kaleb\Documents\MyElectronProject\node_modules\@electron\node-gyp\src\win_delay_load_hook.cc">
-      <Filter>C:\Users\Kaleb\Documents\MyElectronProject\node_modules\@electron\node-gyp\src</Filter>
+    <ClCompile Include="C:\Users\Kaleb\AppData\Local\nvm\v23.7.0\node_modules\node-gyp\src\win_delay_load_hook.cc">
+      <Filter>C:\Users\Kaleb\AppData\Local\nvm\v23.7.0\node_modules\node-gyp\src</Filter>
     </ClCompile>
     <None Include="..\binding.gyp">
       <Filter>..</Filter>
