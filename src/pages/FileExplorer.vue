@@ -41,7 +41,7 @@ const goBack = (filepath: string) => {
 </script>
 
 <template>
-  hello this is file explorer
+  <!-- hello this is file explorer -->
   <div>
     <h1>File Explorer</h1>
     <button @click="goBack(currentPath)">back</button>

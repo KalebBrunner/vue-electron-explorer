@@ -1,14 +1,11 @@
 <script setup lang="ts">
+import FileExplorer from "./pages/FileExplorer.vue";
+import PrimeFinder from "./pages/PrimeFinder.vue";
 import Welcome from "./pages/Welcome.vue";
-// import FileExplorer from "./pages/FileExplorer.vue";
-
-const findPrime = async () => {
-  const result = window.electron.ipcRenderer.invoke("find-prime", 100);
-  console.log("Largest prime:", result);
-};
 </script>
 
 <template>
-  <Welcome></Welcome>
-  <button @click="findPrime">Find Largest Prime</button>
+  <Welcome />
+  <PrimeFinder />
+  <FileExplorer />
 </template>
