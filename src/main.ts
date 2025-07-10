@@ -4,6 +4,7 @@ import path from "path";
 import started from "electron-squirrel-startup";
 import "./ipc_fs_handler";
 
+// Natives
 const findPrimes = require("bindings")("findprimes");
 
 const result = findPrimes(100);
@@ -12,6 +13,17 @@ console.log("Largest prime under 100:", result);
 ipcMain.handle("find-prime", (_event, upperLimit: number) => {
   return findPrimes(upperLimit);
 });
+
+ipcMain.handle("poker", (_event, upperLimit: number) => {
+  return pokeMe.pokepoke(upperLimit);
+});
+
+const sayHello = require("bindings")("hello");
+console.log(sayHello.value());
+
+const pokeMe = require("bindings")("pokeme");
+console.log(pokeMe.pokepoke(5));
+pokeMe.pokeme;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
