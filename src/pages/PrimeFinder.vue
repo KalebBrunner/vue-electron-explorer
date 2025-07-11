@@ -10,7 +10,6 @@ const increaseLimit = () => {
 };
 
 const findLargestPrime = async (): Promise<void> => {
-  pokething(upperLimit.value);
   largestPrime.value = await window.electron.ipcRenderer.invoke(
     "find-prime",
     upperLimit.value
@@ -19,14 +18,6 @@ const findLargestPrime = async (): Promise<void> => {
   console.log("Largest prime found:", largestPrime.value);
   increaseLimit();
   clicked.value = true;
-};
-
-const pokething = async (number: number): Promise<void> => {
-  const mystring = await window.electron.ipcRenderer.invoke(
-    "poker",
-    upperLimit.value
-  );
-  console.log(mystring);
 };
 </script>
 

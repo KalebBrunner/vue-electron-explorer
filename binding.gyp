@@ -13,9 +13,9 @@
       ]
     },
     {
-      "target_name": "pokeme",
+      "target_name": "prisoner",
       "sources": [
-        "src/native/pokeme.cc"
+        "src/native/prisoner.cc"
       ]
     }
   ]

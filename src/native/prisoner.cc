@@ -1,21 +1,21 @@
 #include <node_api.h>
 
-napi_value PokeMe(napi_env env, napi_callback_info info)
+napi_value prisoner(napi_env env, napi_callback_info info)
 {
-    size_t argcount = 1;
-    napi_value arglist[1];
-    napi_get_cb_info(env, info, &argcount, arglist, NULL, NULL);
+    size_t arg_count = 1;
+    napi_value arg_list[1];
+    napi_get_cb_info(env, info, &arg_count, arg_list, NULL, NULL);
 
-    int32_t dmg;
-    napi_get_value_int32(env, arglist[0], &dmg);
+    int32_t damage;
+    napi_get_value_int32(env, arg_list[0], &damage);
 
     // Add the logic
     napi_value result;
-    if (dmg < 400)
+    if (damage < 5)
     {
         napi_create_string_utf8(env, "owch", NAPI_AUTO_LENGTH, &result);
     }
-    else if (dmg < 1000)
+    else if (damage < 10)
     {
         napi_create_string_utf8(env, "AAAH!", NAPI_AUTO_LENGTH, &result);
     }
@@ -30,8 +30,8 @@ napi_value PokeMe(napi_env env, napi_callback_info info)
 napi_value Init(napi_env env, napi_value exports)
 {
     napi_value fn;
-    napi_create_function(env, NULL, 0, PokeMe, NULL, &fn);
-    napi_set_named_property(env, exports, "pokepoke", fn);
+    napi_create_function(env, NULL, 0, prisoner, NULL, &fn);
+    napi_set_named_property(env, exports, "poke", fn);
     return exports;
 }
 

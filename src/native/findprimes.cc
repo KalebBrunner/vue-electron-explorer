@@ -50,7 +50,7 @@ int find_prime(int upper_limit)
     return largest_prime;
 }
 
-napi_value FindPrimes(napi_env env, napi_callback_info info)
+napi_value FindPrime(napi_env env, napi_callback_info info)
 {
     size_t argc = 1;
     napi_value args[1];
@@ -71,11 +71,11 @@ napi_value FindPrimes(napi_env env, napi_callback_info info)
 
 napi_value init(napi_env env, napi_value exports)
 {
-    napi_value find_primes;
+    napi_value find_prime;
 
-    napi_create_function(env, nullptr, 0, FindPrimes, nullptr, &find_primes);
+    napi_create_function(env, nullptr, 0, FindPrime, nullptr, &find_prime);
 
-    return find_primes;
+    return find_prime;
 }
 
 NAPI_MODULE(NODE_GYP_MODULE_NAME, init);
