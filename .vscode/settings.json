@@ -1,0 +1,4 @@
+{
+    "C_Cpp.formatting": "vcFormat",
+    "C_Cpp.vcFormat.space.pointerReferenceAlignment": "left"
+}

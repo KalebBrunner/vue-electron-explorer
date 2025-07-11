@@ -4,13 +4,13 @@
 import { contextBridge, ipcRenderer } from "electron";
 
 contextBridge.exposeInMainWorld("electron", {
-  readFolder: (folderPath: string) =>
-    ipcRenderer.invoke("read-folder", folderPath),
+  // readFolder: (folderPath: string) =>
+  //   ipcRenderer.invoke("read-folder", folderPath),
 
-  getDownloadsPath: () => ipcRenderer.invoke("get-downloads-path"), // Invoke from main process
+  // getDownloadsPath: () => ipcRenderer.invoke("get-downloads-path"),
 
   ipcRenderer: {
-    invoke: (channel: string, ...args: any[]) =>
+    newInvoke: (channel: string, ...args: any[]) =>
       ipcRenderer.invoke(channel, ...args),
   },
 });

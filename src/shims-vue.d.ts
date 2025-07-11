@@ -19,7 +19,7 @@ export interface ElectronAPI {
   readFolder: (folderPath: string) => Promise<any>;
   getDownloadsPath: () => Promise<string>;
   ipcRenderer: {
-    invoke<T = any>(channel: string, ...args: any[]): Promise<T>;
+    newInvoke<T = any>(channel: string, ...args: any[]): Promise<T>;
   };
 }
 
