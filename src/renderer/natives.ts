@@ -24,3 +24,9 @@ import "./native_examples";
 // const prisoner = require("bindings")("prisoner");
 // // console.log(prisoner.poke(5));
 
+// const read_files = require("bindings")("fs");
+// console.log(read_files.run("path"));
+
+// ipcMain.handle("fs", (_event) => {
+//   return testString.getString();
+// });

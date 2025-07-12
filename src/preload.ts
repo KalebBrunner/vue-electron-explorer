@@ -10,7 +10,7 @@ contextBridge.exposeInMainWorld("electron", {
   // getDownloadsPath: () => ipcRenderer.invoke("get-downloads-path"),
 
   ipcRenderer: {
-    newInvoke: (channel: string, ...args: any[]) =>
+    invoke: (channel: string, ...args: any[]) =>
       ipcRenderer.invoke(channel, ...args),
   },
 });
