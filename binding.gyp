@@ -18,12 +18,12 @@
     #     "src/native/prisoner.cc"
     #   ]
     # },
-    #     {
-    #   "target_name": "read_files",
-    #   "sources": [
-    #     "src/native/read_files.cc"
-    #   ]
-    # },
+        {
+      "target_name": "fs",
+      "sources": [
+        "src/native/fs.cc"
+      ]
+    },
     {
       "target_name": "test_string_aa",
       "sources": [
