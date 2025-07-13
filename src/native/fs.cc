@@ -114,12 +114,15 @@ napi_value read_files(napi_env env, napi_callback_info info) {
 
 
     // int64_t file_count = count_files(path);
-    napi_value output;
-    NAPI_CALL(env, napi_create_double(env, 5, &output));
+    napi_value number_output;
+    NAPI_CALL(env, napi_create_double(env, 5, &number_output));
+
+    napi_value string_output;
+    NAPI_CALL(env, napi_create_string_utf8(env, "This is from fs.cc", NAPI_AUTO_LENGTH, &string_output));
 
     free(string_buffer);
 
-    return output;
+    return string_output;
 }
 
 
