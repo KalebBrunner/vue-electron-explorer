@@ -1,16 +1,9 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import TableElement from "./TableElement.vue";
+import { File } from "../renderer/file";
 
-const files = ref<
-  {
-    name: string;
-    path: string;
-    isDirectory: boolean;
-    size: number;
-    modified: string;
-  }[]
->([]);
+const files = ref<File[]>([]);
 
 let currentPath = ref("");
 
@@ -34,7 +27,8 @@ const goBack = (filepath: string) => {
   let directoryElements = filepath.split("\\");
   void directoryElements.pop();
   currentPath.value = directoryElements.join("\\");
-  // currentPath.value = "C:\\";
+
+  currentPath.value = "C:\\";
 
   void updateDirectory(currentPath.value);
 };

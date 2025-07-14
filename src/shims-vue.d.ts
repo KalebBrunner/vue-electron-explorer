@@ -1,3 +1,5 @@
+import { File } from "./renderer/file";
+
 declare module "*.vue" {
   import type { DefineComponent } from "vue";
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -16,7 +18,7 @@ declare global {
 }
 
 export interface ElectronAPI {
-  readFolder: (folderPath: string) => Promise<any>;
+  readFolder: (folderPath: string) => Promise<File[]>;
   getDownloadsPath: () => Promise<string>;
   ipcRenderer: {
     invoke<T = any>(channel: string, ...args: any[]): Promise<T>;
