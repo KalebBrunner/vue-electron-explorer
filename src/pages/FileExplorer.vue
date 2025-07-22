@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import TableElement from "./TableElement.vue";
-import { File } from "../renderer/file";
+import { File } from "../objects/file";
 
 const files = ref<File[]>([]);
 
@@ -15,7 +15,8 @@ const getDownloadsPath = async () => {
 
 const updateDirectory = async (folderPath: string) => {
   currentPath.value = folderPath;
-  files.value = await window.electron.readFolder(folderPath);
+  const plainFiles = await window.electron.readFolder(folderPath);
+  files.value = plainFiles.map((file: any) => File.fromObject(file));
 };
 
 // Call to get the Downloads path when the app starts
@@ -25,11 +26,15 @@ void getDownloadsPath();
 
 const goBack = (filepath: string) => {
   let directoryElements = filepath.split("\\");
-  void directoryElements.pop();
-  currentPath.value = directoryElements.join("\\");
+  directoryElements.pop();
+  let parentPath = directoryElements.join("\\");
 
-  currentPath.value = "C:\\";
+  // Add trailing backslash for root drives
+  if (parentPath.match(/^[A-Z]:$/)) {
+    parentPath += "\\";
+  }
 
+  currentPath.value = parentPath;
   void updateDirectory(currentPath.value);
 };
 </script>

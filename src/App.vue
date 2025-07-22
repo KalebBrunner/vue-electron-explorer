@@ -5,5 +5,5 @@ import Welcome from "./pages/Welcome.vue";
 
 <template>
   <Welcome />
-  <!-- <FileExplorer /> -->
+  <FileExplorer />
 </template>

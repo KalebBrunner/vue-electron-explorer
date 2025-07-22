@@ -3,7 +3,15 @@
 
 trailing commas pretier
 
-Hi Claude, I'm working on an electron project with vue and typescript. This brought in core files like main.ts, preload, the renderer with IPCS, shims-vue.d.ts for types, and app.vue. Additionally, I am using node-gyp to run napi/native c files. This brought in core files like bindings.gyp.
+Hi Claude, I'm working on an electron project with vue and typescript. 
+This brought in core files like main.ts, preload, the renderer with IPCS, shims-vue.d.ts for types, and app.vue. 
+I'd like to progress at my own speed so let me lead the investigation and keep your answers short.
+
+
+The current task is using fs to read files from my system. I've just created a file class and want to begin implementing it into the ipc system
+
+Additionally, I am using node-gyp to run napi/native c files. This brought in core files like bindings.gyp.
+
 
 
 

@@ -1,4 +1,4 @@
-import { File } from "./renderer/file";
+import { File } from "./objects/file";
 
 declare module "*.vue" {
   import type { DefineComponent } from "vue";

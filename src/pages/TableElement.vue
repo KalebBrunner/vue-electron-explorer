@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { File } from "../renderer/file";
+import { File } from "../objects/file";
 
 const emit = defineEmits(["update-file-path"]);
 
