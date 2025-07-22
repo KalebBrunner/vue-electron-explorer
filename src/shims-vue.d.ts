@@ -9,14 +9,6 @@ declare module "*.vue" {
 
 export {};
 
-declare global {
-  interface Window {
-    myAPI: {
-      findPrime: (upperLimit: number) => Promise<number>;
-    };
-  }
-}
-
 export interface ElectronAPI {
   readFolder: (folderPath: string) => Promise<File[]>;
   getDownloadsPath: () => Promise<string>;

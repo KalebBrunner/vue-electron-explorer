@@ -11,9 +11,4 @@ contextBridge.exposeInMainWorld("electron", {
     }),
 
   getDownloadsPath: () => ipcRenderer.invoke("get-downloads-path"),
-
-  ipcRenderer: {
-    invoke: (channel: string, ...args: any[]) =>
-      ipcRenderer.invoke(channel, ...args),
-  },
 });
