@@ -1,32 +1,33 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import TableElement from "./TableElement.vue";
+import { ref, computed } from "vue";
 import { File } from "../objects/file";
+import { SortReverse, SortStrategy } from "../objects/sort";
+
+import TableElement from "./TableElement.vue";
+import SortingMenu from "./SortingMenu.vue";
 
 const files = ref<File[]>([]);
+const currentSortSequence = ref<SortStrategy<File>>(new SortReverse());
+
+const sortedFiles = computed(() => {
+  return currentSortSequence.value.sort(files.value);
+});
 
 let currentPath = ref("");
 
-// Use the API to get the Downloads path
-const getDownloadsPath = async () => {
-  currentPath.value = await window.electron.getDownloadsPath();
-  void updateDirectory(currentPath.value); // Start loading files from Downloads
+const changeDirectory = async (path: string) => {
+  currentPath.value = path;
+  const crudeFiles = await window.electron.readFolder(path);
+  files.value = crudeFiles.map((crudeFile: any) => File.fromObject(crudeFile));
 };
 
-const updateDirectory = async (folderPath: string) => {
-  currentPath.value = folderPath;
-  const plainFiles = await window.electron.readFolder(folderPath);
-  files.value = plainFiles.map((file: any) => File.fromObject(file));
+const getDirectory = async (path: string) => {
+  void (await changeDirectory(path));
 };
 
-// Call to get the Downloads path when the app starts
-void getDownloadsPath();
-
-// const myPath = ref(currentPath.value);
-
-const goBack = (filepath: string) => {
+const stepOut = (filepath: string) => {
   let directoryElements = filepath.split("\\");
-  directoryElements.pop();
+  void directoryElements.pop();
   let parentPath = directoryElements.join("\\");
 
   // Add trailing backslash for root drives
@@ -35,15 +36,24 @@ const goBack = (filepath: string) => {
   }
 
   currentPath.value = parentPath;
-  void updateDirectory(currentPath.value);
+  void getDirectory(currentPath.value);
 };
+
+const setDefaultPath = async () => {
+  // Use the API to get the Downloads path
+  currentPath.value = await window.electron.getDownloadsPath();
+  void getDirectory(currentPath.value); // Start loading files from Downloads
+};
+
+void setDefaultPath();
 </script>
 
 <template>
   <!-- hello this is file explorer -->
+  <SortingMenu />
   <div>
     <h1>File Explorer</h1>
-    <button @click="goBack(currentPath)">back</button>
+    <button @click="stepOut(currentPath)">back</button>
     <!-- <p>Return: {{ currentPath }}</p> -->
     <p>Current Folder: {{ currentPath }}</p>
     <table>
@@ -55,10 +65,10 @@ const goBack = (filepath: string) => {
         </tr>
       </thead>
       <tbody>
-        <template v-for="file of files">
+        <template v-for="file of sortedFiles">
           <TableElement
             :file
-            @update-file-path="(filepath) => updateDirectory(filepath)"
+            @stepIn="(filepath) => void getDirectory(filepath)"
           />
         </template>
       </tbody>

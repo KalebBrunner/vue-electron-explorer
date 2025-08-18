@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { File } from "../objects/file";
 
-const emit = defineEmits(["update-file-path"]);
+const emit = defineEmits(["stepIn"]);
 
 const props = defineProps({
   file: {
@@ -10,8 +10,8 @@ const props = defineProps({
   },
 });
 
-const formatSize = (size: number | null) => {
-  if (size === null) {
+const formatFileSize = (size: number | undefined) => {
+  if (size === undefined) {
     return "n/a";
   }
   if (size < 1024) return `${size} B`;
@@ -23,13 +23,13 @@ const formatSize = (size: number | null) => {
 <template>
   <tr>
     <td width="1000px">
-      <span @dblclick="emit('update-file-path', file.path)">
+      <span @dblclick="emit('stepIn', file.path)">
         <span v-if="file.isDirectory">📁</span>
         <span v-else>📄</span>
         {{ file.name }}
       </span>
     </td>
-    <td>{{ file.isDirectory ? "-" : formatSize(file.size) }}</td>
+    <td>{{ file.isDirectory ? "-" : formatFileSize(file.size) }}</td>
     <td>{{ file.modified }}</td>
   </tr>
 </template>

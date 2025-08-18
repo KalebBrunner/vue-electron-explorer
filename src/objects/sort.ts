@@ -1,0 +1,31 @@
+export abstract class SortStrategy<T> {
+  reverse: boolean = false;
+
+  abstract sortInner(files: Array<T>): Array<T>;
+
+  sort(files: Array<T>): Array<T> {
+    let data = this.sortInner(files);
+
+    if (this.reverse) {
+      data.reverse();
+    }
+
+    return data;
+  }
+}
+
+export interface HasName {
+  getName(): string;
+}
+
+export class SortReverse<T extends HasName> extends SortStrategy<T> {
+  sortInner(files: T[]): T[] {
+    return [...files].reverse();
+  }
+}
+
+class SortAlphabetically extends SortStrategy<HasName> {
+  sortInner(files: HasName[]): HasName[] {
+    return files;
+  }
+}
