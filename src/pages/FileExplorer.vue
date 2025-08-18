@@ -40,9 +40,9 @@ const stepOut = (filepath: string) => {
 };
 
 const setDefaultPath = async () => {
-  // Use the API to get the Downloads path
-  currentPath.value = await window.electron.getDownloadsPath();
-  void getDirectory(currentPath.value); // Start loading files from Downloads
+  // Use the API to get the default path
+  currentPath.value = await window.electron.getDefaultPath();
+  void getDirectory(currentPath.value);
 };
 
 void setDefaultPath();
