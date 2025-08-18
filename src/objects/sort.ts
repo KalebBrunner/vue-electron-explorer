@@ -18,14 +18,14 @@ export interface HasName {
   getName(): string;
 }
 
-export class SortReverse<T extends HasName> extends SortStrategy<T> {
-  sortInner(files: T[]): T[] {
-    return [...files].reverse();
+export class SortAlphabetically<T extends HasName> extends SortStrategy<T> {
+  sortInner(data: T[]): T[] {
+    return [...data].sort();
   }
 }
 
-class SortAlphabetically extends SortStrategy<HasName> {
-  sortInner(files: HasName[]): HasName[] {
-    return files;
+export class SortReverse<T extends HasName> extends SortStrategy<T> {
+  sortInner(data: T[]): T[] {
+    return [...data].reverse();
   }
 }

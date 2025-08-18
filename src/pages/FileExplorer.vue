@@ -1,8 +1,10 @@
 <script setup lang="ts">
+// vue objects
 import { ref, computed } from "vue";
+// project objects
 import { File } from "../objects/file";
-import { SortReverse, SortStrategy } from "../objects/sort";
-
+import { SortStrategy, SortAlphabetically, SortReverse } from "../objects/sort";
+// view components
 import TableElement from "./TableElement.vue";
 import SortingMenu from "./SortingMenu.vue";
 
@@ -12,7 +14,6 @@ const currentSortSequence = ref<SortStrategy<File>>(new SortReverse());
 const sortedFiles = computed(() => {
   return currentSortSequence.value.sort(files.value);
 });
-
 let currentPath = ref("");
 
 const changeDirectory = async (path: string) => {
@@ -50,7 +51,7 @@ void setDefaultPath();
 
 <template>
   <!-- hello this is file explorer -->
-  <SortingMenu />
+  <SortingMenu :sortedFiles />
   <div>
     <h1>File Explorer</h1>
     <button @click="stepOut(currentPath)">back</button>
