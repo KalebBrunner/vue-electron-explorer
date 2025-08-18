@@ -1,44 +1,32 @@
+<!-- SortingMenu.vue -->
 <script setup lang="ts">
 import { ref } from "vue";
 import { File } from "../objects/file";
-import { SortStrategy, SortAlphabetically, SortReverse } from "../objects/sort";
+import { extension, extensionsGroup, recursive } from "../objects/hierarchy";
 
-const props = defineProps({
-  sortedFiles: {
-    type: Array<File>,
-    required: true,
-  },
-});
+const bakedfiles = ref<File[]>([
+  new File("notes.txt", "C://Test/notes.txt", false, 1234),
+  new File("report.doc", "C://Test/report.doc", false, 4567),
+  new File("photo.png", "C://Test/photo.png", false, 2345),
+  new File("portrait.jpg", "C://Test/portrait.jpg", false, 3456),
+  new File("random.bin", "C://Test/random.bin", false, 999),
+]);
 
-// Sorting state
-const foldersFirst = ref(true);
-const numericSort = ref(false);
-const ascending = ref(true);
+const props = defineProps<{ modelValue: File[] }>();
+const emit = defineEmits<{ (e: "update:modelValue", files: File[]): void }>();
 
-const applySorting = () => {
-  //   // Change the strategy, computed will handle the rest
-  //   props.currentSortSequence.value = new CompositeSorter(
-  //     foldersFirst.value ? new FoldersFirstSorter() : new FilesFirstSorter(),
-  //     numericSort.value ? new NumericSorter() : new AlphabeticalSorter(),
-  //     ascending.value ? new NoReverse() : new SortReverse()
-  //   );
+const hierarchy = new extensionsGroup([
+  new extensionsGroup([new extension(".jpg"), new extension(".txt")]),
+  new extensionsGroup([new extension(".png"), new extension(".doc")]),
+]);
+
+const applyHierarchySort = () => {
+  const copy = [...props.modelValue];
+  const ordered = recursive(copy, hierarchy);
+  emit("update:modelValue", ordered.concat(copy));
 };
 </script>
 
 <template>
-  <h1>Sorting Menu</h1>
-  <div>
-    <label>
-      <input type="checkbox" v-model="foldersFirst" @change="applySorting" />
-      Folders first
-    </label>
-    <label>
-      <input type="checkbox" v-model="numericSort" @change="applySorting" />
-      Numeric sort
-    </label>
-    <label>
-      <input type="checkbox" v-model="ascending" @change="applySorting" />
-      Ascending
-    </label>
-  </div>
+  <button @click="applyHierarchySort">Sort by Extension Hierarchy</button>
 </template>

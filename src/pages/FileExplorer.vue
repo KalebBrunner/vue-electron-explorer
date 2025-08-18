@@ -9,11 +9,11 @@ import TableElement from "./TableElement.vue";
 import SortingMenu from "./SortingMenu.vue";
 
 const files = ref<File[]>([]);
-const currentSortSequence = ref<SortStrategy<File>>(new SortReverse());
+// const currentSortSequence = ref<SortStrategy<File>>(new SortReverse());
 
-const sortedFiles = computed(() => {
-  return currentSortSequence.value.sort(files.value);
-});
+// const sortedFiles = computed(() => {
+//   return currentSortSequence.value.sort(files.value);
+// });
 let currentPath = ref("");
 
 const changeDirectory = async (path: string) => {
@@ -37,13 +37,13 @@ const stepOut = (filepath: string) => {
   }
 
   currentPath.value = parentPath;
-  void getDirectory(currentPath.value);
+  void changeDirectory(currentPath.value);
 };
 
 const setDefaultPath = async () => {
   // Use the API to get the default path
   currentPath.value = await window.electron.getDefaultPath();
-  void getDirectory(currentPath.value);
+  void changeDirectory(currentPath.value);
 };
 
 void setDefaultPath();
@@ -51,10 +51,19 @@ void setDefaultPath();
 
 <template>
   <!-- hello this is file explorer -->
-  <SortingMenu :sortedFiles />
+  <SortingMenu v-model="files" />
   <div>
     <h1>File Explorer</h1>
     <button @click="stepOut(currentPath)">back</button>
+    <button
+      @click="
+        changeDirectory(
+          'C:\\Documents2\\Coding\\MyElectronProject\\src\\TestFiles'
+        )
+      "
+    >
+      To TestFiles
+    </button>
     <!-- <p>Return: {{ currentPath }}</p> -->
     <p>Current Folder: {{ currentPath }}</p>
     <table>
@@ -66,10 +75,10 @@ void setDefaultPath();
         </tr>
       </thead>
       <tbody>
-        <template v-for="file of sortedFiles">
+        <template v-for="file of files">
           <TableElement
             :file
-            @stepIn="(filepath) => void getDirectory(filepath)"
+            @stepIn="(filepath) => void changeDirectory(filepath)"
           />
         </template>
       </tbody>

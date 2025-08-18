@@ -13,6 +13,10 @@ export class File implements HasName {
     return this.name;
   }
 
+  public getExtension(): string {
+    return this.name.substring(this.name.lastIndexOf("."), this.name.length);
+  }
+
   public static fromObject(obj: any): File {
     return new File(
       obj.name,
