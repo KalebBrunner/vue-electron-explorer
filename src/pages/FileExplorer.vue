@@ -7,6 +7,7 @@ import { SortStrategy, SortAlphabetically, SortReverse } from "../objects/sort";
 // view components
 import TableElement from "./TableElement.vue";
 import SortingMenu from "./SortingMenu.vue";
+import CDDirect from "./CDDirect.vue";
 
 const files = ref<File[]>([]);
 // const currentSortSequence = ref<SortStrategy<File>>(new SortReverse());
@@ -60,6 +61,7 @@ void setDefaultPath();
     >
       To TestFiles
     </button>
+    <!-- <CDDirect v-model="currentPath" /> -->
     <!-- <p>Return: {{ currentPath }}</p> -->
     <p>Current Folder: {{ currentPath }}</p>
     <table>
