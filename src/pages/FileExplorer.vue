@@ -22,10 +22,6 @@ const changeDirectory = async (path: string) => {
   files.value = crudeFiles.map((crudeFile: any) => File.fromObject(crudeFile));
 };
 
-const getDirectory = async (path: string) => {
-  void (await changeDirectory(path));
-};
-
 const stepOut = (filepath: string) => {
   let directoryElements = filepath.split("\\");
   void directoryElements.pop();
@@ -40,9 +36,9 @@ const stepOut = (filepath: string) => {
   void changeDirectory(currentPath.value);
 };
 
-const setDefaultPath = async () => {
+const setDefaultPath = () => {
   // Use the API to get the default path
-  currentPath.value = await window.electron.getDefaultPath();
+  currentPath.value = "C:\\Users\\Kaleb\\Downloads";
   void changeDirectory(currentPath.value);
 };
 

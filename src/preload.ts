@@ -12,6 +12,4 @@ contextBridge.exposeInMainWorld("electron", {
     ipcRenderer.invoke("read-folder", folderPath).then((files) => {
       return files.map((file: object) => File.fromObject(file));
     }),
-
-  getDefaultPath: () => ipcRenderer.invoke("get-default-path"),
 });

@@ -1,9 +1,6 @@
 import fs from "fs";
-import { app, ipcMain } from "electron";
+import { ipcMain } from "electron";
 import { File } from "../objects/file";
-
-// Expose the default path to renderer process
-ipcMain.handle("get-default-path", () => app.getPath("documents"));
 
 ipcMain.handle("read-folder", async (_event, folderPath) => {
   console.log(folderPath);
