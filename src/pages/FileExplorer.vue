@@ -10,11 +10,6 @@ import SortingMenu from "./SortingMenu.vue";
 import CDDirect from "./CDDirect.vue";
 
 const files = ref<File[]>([]);
-// const currentSortSequence = ref<SortStrategy<File>>(new SortReverse());
-
-// const sortedFiles = computed(() => {
-//   return currentSortSequence.value.sort(files.value);
-// });
 let currentPath = ref("");
 
 const changeDirectory = async (path: string) => {
@@ -61,7 +56,8 @@ void setDefaultPath();
     >
       To TestFiles
     </button>
-    <!-- <CDDirect v-model="currentPath" /> -->
+    <CDDirect v-model="currentPath" @navigate="changeDirectory(currentPath)" />
+
     <!-- <p>Return: {{ currentPath }}</p> -->
     <p>Current Folder: {{ currentPath }}</p>
     <table>

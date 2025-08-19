@@ -1,8 +1,37 @@
 <script setup lang="ts">
-const props = defineProps<{ path: string }>();
-const emit = defineEmits<{ (e: "update:modelValue", path: string): void }>();
+import { ref, watch } from "vue";
+
+const props = defineProps<{ modelValue: string }>();
+const emit = defineEmits<{
+  (e: "update:modelValue", value: string): void;
+  (e: "navigate", value: string): void;
+}>();
+
+const inputValue = ref(props.modelValue);
+
+// keep in sync if parent changes it
+watch(
+  () => props.modelValue,
+  (newVal) => {
+    inputValue.value = newVal;
+  }
+);
+
+function submit() {
+  emit("update:modelValue", inputValue.value);
+  emit("navigate", inputValue.value);
+}
 </script>
 
 <template>
-  <h1>This is the CD Direct component</h1>
+  <div>This is the CD Direct component</div>
+
+  <div>
+    <input
+      v-model="inputValue"
+      @keyup.enter="submit"
+      placeholder="Enter path..."
+    />
+    <button @click="submit">Submit</button>
+  </div>
 </template>
