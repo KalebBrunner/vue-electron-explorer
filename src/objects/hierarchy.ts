@@ -1,46 +1,62 @@
 // pseudo code for recursive hierarchy function
 import { File } from "./file";
 
-export class Extension {
-  public constructor(public type: string) {}
+class Category {
+  constructor(public identifier: string) {}
+
+  // static group(
+  //   matchingStrategy: (categoryId: string,file: File) => boolean,
+  //   ...elements: (Category | CategoryGroup | string)[]
+  // ): CategoryGroup {
+  //   return new CategoryGroup(
+  //     matchingStrategy,
+  //     elements.map((e) => (typeof e === "string" ? new Category(e) : e))
+  //   );
+  // }
 }
 
-export class ExtensionGroup {
-  public constructor(public elements: (Extension | ExtensionGroup)[]) {}
+class CategoryGroup {
+  constructor(
+    // undefined function which checks if a files is in the category
+    public matchingStrategy: (category: Category, file: File) => boolean,
+    public elements: (Category | CategoryGroup)[]
+  ) {}
 }
 
-export function group(
-  ...elements: (Extension | ExtensionGroup | string)[]
-): ExtensionGroup {
-  return new ExtensionGroup(
-    elements.map((e) => (typeof e === "string" ? new Extension(e) : e))
-  );
-}
+// export function group(...elements: (Category | CategoryGroup | string)[]): CategoryGroup {
+//   return new CategoryGroup(
+//     elements.map((e) =>
+//       typeof e === "string"
+//         ? new Category((file) => file.getExtension() === e) // convert string to extension matcher
+//         : e
+//     )
+//   );
+// }
 
-export function sortByGroup(files: File[], group: ExtensionGroup): File[] {
+export function sortByCategory(files: File[], group: CategoryGroup): File[] {
   let filteredFileList: File[] = [];
 
   for (const item of group.elements) {
-    if (item instanceof Extension) {
+    if (item instanceof Category) {
       for (let i = files.length - 1; i >= 0; i--) {
         const file = files[i];
 
-        if (file.getExtension() == item.type) {
+        if (group.matchingStrategy(item.identifier, file)) {
           filteredFileList.push(file);
           files.splice(i, 1);
         }
       }
-    } else if (item instanceof ExtensionGroup) {
-      const subList = sortByGroup(files, item);
+    } else if (item instanceof CategoryGroup) {
+      const subList = sortByCategory(files, item);
       filteredFileList = filteredFileList.concat(subList);
     } else {
-      throw new Error("Invalid element in Extension hierarchy list");
+      throw new Error("Invalid element in Category hierarchy list");
     }
   }
   return filteredFileList;
 }
 
-// export function sortByGroup(files: File[], group: ExtensionGroup): File[] {
+// export function sortByGroup(files: File[], group: CategoryGroup): File[] {
 //   console.log(
 //     `🔍 Starting recursive call with ${files.length} files and group:`,
 //     group
@@ -54,17 +70,17 @@ export function sortByGroup(files: File[], group: ExtensionGroup): File[] {
 //   for (const item of group.elements) {
 //     console.log(`🔄 Processing element:`, item);
 
-//     if (item instanceof Extension) {
-//       console.log(`📄 Found Extension item with type: ${item.type}`);
+//     if (item instanceof Category) {
+//       console.log(`📄 Found Category item with type: ${item.type}`);
 //       console.log(
-//         `📁 Searching through ${files.length} files for Extension: ${item.type}`
+//         `📁 Searching through ${files.length} files for Category: ${item.type}`
 //       );
 
 //       let matchCount = 0;
 //       for (let i = files.length - 1; i >= 0; i--) {
 //         const file = files[i];
 //         console.log(
-//           `  🔎 Checking file ${i}: Extension = "${file.getExtension()}" vs target = "${
+//           `  🔎 Checking file ${i}: Category = "${file.getExtension()}" vs target = "${
 //             item.type
 //           }"`
 //         );
@@ -78,9 +94,9 @@ export function sortByGroup(files: File[], group: ExtensionGroup): File[] {
 //           matchCount++;
 //         }
 //       }
-//       console.log(`📊 Found ${matchCount} files with Extension "${item.type}"`);
-//     } else if (item instanceof ExtensionGroup) {
-//       console.log(`📂 Found nested ExtensionGroup, making recursive call...`);
+//       console.log(`📊 Found ${matchCount} files with Category "${item.type}"`);
+//     } else if (item instanceof CategoryGroup) {
+//       console.log(`📂 Found nested CategoryGroup, making recursive call...`);
 //       console.log(`   Files before recursive call: ${files.length}`);
 
 //       const subList = sortByGroup(files, item);
@@ -93,8 +109,8 @@ export function sortByGroup(files: File[], group: ExtensionGroup): File[] {
 //         `   Combined filtered list now has: ${filteredFileList.length} files`
 //       );
 //     } else {
-//       console.error(`❌ Invalid element in Extension hierarchy list:`, item);
-//       throw new Error("Invalid element in Extension hierarchy list");
+//       console.error(`❌ Invalid element in Category hierarchy list:`, item);
+//       throw new Error("Invalid element in Category hierarchy list");
 //     }
 //   }
 
@@ -106,8 +122,8 @@ export function sortByGroup(files: File[], group: ExtensionGroup): File[] {
 //   return filteredFileList;
 // }
 
-// function myFunc(files, ExtensionGroup): files {
-//   foreach (item in ExtensionGroup) {
+// function myFunc(files, CategoryGroup): files {
+//   foreach (item in CategoryGroup) {
 //     partialFileList = empty
 
 //     if(item is extensios){
@@ -115,10 +131,10 @@ export function sortByGroup(files: File[], group: ExtensionGroup): File[] {
 //         partialFileList += file // add file to sub list
 //         files -= file // remove file from main list to not assign it twice
 //       }
-//     } elseif(item is ExtensionGroup){
+//     } elseif(item is CategoryGroup){
 //       partialFileList += myFunc(files, hierarchyElement)
 //     } else {
-//       "error, invalid element in Extension hierarchy list"
+//       "error, invalid element in Category hierarchy list"
 //     }
 //   }
 //   return partialFileList
