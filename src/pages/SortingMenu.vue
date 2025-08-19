@@ -2,7 +2,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { File } from "../objects/file";
-import { group, sortByGroup } from "../objects/hierarchy";
+import { Filter, sortByRecursiveFilters } from "../objects/hierarchy";
 
 // fake file tree for testing
 // const bakedfiles = ref<File[]>([
@@ -16,11 +16,18 @@ import { group, sortByGroup } from "../objects/hierarchy";
 const props = defineProps<{ modelValue: File[] }>();
 const emit = defineEmits<{ (e: "update:modelValue", files: File[]): void }>();
 
-const hierarchy = group(group(".txt", ".jpg", ".mp3"), group(".png", ".doc"));
+function filterByExtension(file) {
+  file.Extension;
+}
+
+const hierarchy = Filter.group(
+  Filter.group(".txt", ".jpg", ".mp3"),
+  Filter.group(".png", ".doc")
+);
 
 const applyHierarchySort = () => {
   const copy = [...props.modelValue];
-  const ordered = sortByGroup(copy, hierarchy);
+  const ordered = sortByRecursiveFilters(copy, hierarchy);
   emit("update:modelValue", ordered.concat(copy));
 };
 </script>
