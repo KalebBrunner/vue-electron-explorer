@@ -1,12 +1,11 @@
 <script setup lang="ts">
 // import FileExplorer from "./pages/FileExplorer.vue";
-// import Welcome from "./pages/Welcome.vue";
+import Welcome from "./pages/Welcome.vue";
+import filereader from "./pages/filereader.vue"
 </script>
 
 <template>
-
-    Test Hello from app.vue
-
-  <!-- <Welcome /> -->
+  <Welcome />
+  <filereader />
   <!-- <FileExplorer /> -->
 </template>
