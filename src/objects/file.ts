@@ -18,8 +18,7 @@ export class File {
     public size?: number,
     public modified?: string
   ) {}
-  
-  // Creation method as seen in preload.ts
+  /** as seen in preload.ts */
   public static createFromObject(obj: any): File {
     return new File(
       obj.name,
